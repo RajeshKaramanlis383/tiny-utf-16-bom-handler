@@ -53,3 +53,10 @@ error and fix your upstream.
 - `convertEndian(bytes, to)` — returns a new `Uint8Array` with each byte pair swapped; a leading BOM is preserved and itself swapped.
 
 All functions take a `Uint8Array` and return a fresh `Uint8Array` (or throw). Inputs are never mutated.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
